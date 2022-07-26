@@ -5,16 +5,20 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
+                
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-jet-nav-link href="{{ route('widgets') }}" :active="request()->routeIs('widgets')">
+                        {{ __('widgets') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
+                        {{ __('Products') }}
+                    </x-jet-nav-link>
+                    
                 </div>
             </div>
 
@@ -68,7 +72,8 @@
                         </x-jet-dropdown>
                     </div>
                 @endif
-
+                @livewire('cart-counter')
+                @auth
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
@@ -120,6 +125,8 @@
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
+                @endauth
+
             </div>
 
             <!-- Hamburger -->
@@ -140,11 +147,20 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-        </div>
 
+            <x-jet-responsive-nav-link href="{{ route('widgets') }}" :active="request()->routeIs('widgets')">
+                {{ __('widgets') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
+                {{ __('Products') }}
+            </x-jet-responsive-nav-link>
+            
+        </div>
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
+                
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
@@ -211,5 +227,6 @@
                 @endif
             </div>
         </div>
+        @endauth
     </div>
 </nav>
