@@ -3,6 +3,11 @@
 
 Learn Via Book use packt api to fetch data.
 
+
+## Requirement
+
+**REQ:** PHP 8.1+ ,  Laravel 9+ , Node 16+
+
 ## Installation
 
 Download file or clone repo and run below  command
